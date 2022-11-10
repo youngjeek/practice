@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "firstStaging": "cnfidentilly",
+    "default": "cnfidentilly"
+  },
+  "targets": {},
+  "etags": {}
+}

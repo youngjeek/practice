@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import Auth from '../routes/Auth';
-import Home from '../routes/Home';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { Navigate, Redirect } from 'react-router';
+import Auth from 'routes/Auth';
+import Home from 'routes/Home';
+import Profile from 'routes/Profile';
+import Navigation from 'components/Navigation';
 
-const AppRouter = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(); //Hook공부 기초class얼른 뗄 것!!
+const AppRouter = ({ isLoggedIn }) => {
   return (
     <Router>
-      <Switch>
+      {isLoggedIn && <Navigation />}
+      <Routes>
         {isLoggedIn ? (
           <>
-            <Route exact path="/">
-              <Home />
-            </Route>
+            <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/profile" element={<Profile />}></Route>
+            {/* <Route path="*" element={<Navigate replace to="/home" />} /> */}
           </>
         ) : (
-          <Route exact path="/">
-            <Auth />
-          </Route>
+          <Route exact path="/" element={<Auth />}></Route>
         )}
-      </Switch>
+      </Routes>
     </Router>
   );
 };
