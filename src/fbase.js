@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+
 // import 'firebase/compat/auth';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,6 +24,9 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 // Authentication and get a reference to the service
 const authService = getAuth(firebaseApp);
+//firebaseDatabase
+export const dbService = getFirestore(firebaseApp);
+
 export default authService;
 
 // .env사용하면 모듈화된 버전9에서 api-key invalid
