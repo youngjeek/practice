@@ -89,5 +89,4 @@ const Home = ({ userObj }) => {
     </div>
   );
 };
-
 export default Home;
