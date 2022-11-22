@@ -8,6 +8,7 @@ import {
   onSnapshot,
   orderBy,
 } from 'firebase/firestore';
+import Tally from 'components/tally';
 
 const Home = ({ userObj }) => {
   const [tally, setTally] = useState('');
@@ -74,16 +75,16 @@ const Home = ({ userObj }) => {
           placeholder="Tally of Today I learn"
           maxLength={120}
         />
+
         <input type="submit" value="전송" />
       </form>
       <div>
-        {tallies.map((item) => (
-          <div key={item.id}>
-            <h4>
-              {item.tally} ...
-              <span>{new Date(item.createDate).toLocaleString()}</span>
-            </h4>
-          </div>
+        {tallies.map((tally) => (
+          <Tally
+            key={tally.id}
+            tallyObj={tally}
+            isOwner={tally.createId === userObj.uid}
+          />
         ))}
       </div>
     </div>

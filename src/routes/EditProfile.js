@@ -1,4 +1,11 @@
 import React from 'react';
 
-const Edit = () => <span>Edit Profile</span>;
-export default Edit;
+const EditProfile = () => {
+  const onFileChange = (e) => {};
+  return (
+    <div>
+      <input type="file" accept="image/*" onChange={onFileChange} />
+    </div>
+  );
+};
+export default EditProfile;
