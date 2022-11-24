@@ -12,7 +12,11 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
         {isLoggedIn ? (
           <>
             <Route exact path="/" element={<Home userObj={userObj} />}></Route>
-            <Route exact path="/profile" element={<Profile />}></Route>
+            <Route
+              exact
+              path="/profile"
+              element={<Profile userObj={userObj} />}
+            ></Route>
             {/* <Route path="*" element={<Navigate replace to="/home" />} /> */}
           </>
         ) : (

@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 // import 'firebase/compat/auth';
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,6 +27,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const authService = getAuth(firebaseApp);
 //firebaseDatabase
 export const dbService = getFirestore(firebaseApp);
+export const storageService = getStorage();
 
 export default authService;
 
