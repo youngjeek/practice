@@ -4,7 +4,7 @@ import { signOut } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import EditProfile from './EditProfile';
 
-const Profile = () => {
+const Profile = ({ userObj }) => {
   const navigate = useNavigate();
   const onLogOutClick = () =>
     signOut(authService).then(() => {
@@ -13,7 +13,7 @@ const Profile = () => {
   return (
     <>
       <span>Profile</span>
-      <EditProfile />
+      <EditProfile userObj={userObj} />
       <br></br>
       <br></br>
       <br></br>

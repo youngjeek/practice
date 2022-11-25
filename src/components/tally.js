@@ -48,16 +48,13 @@ const Tally = ({ tallyObj, isOwner }) => {
       ) : (
         <>
           <h4>
+            <img src={tallyObj.profileImg} width="30px" height="30px" />
             {tallyObj.tally} ...
             <span>{new Date(tallyObj.createDate).toLocaleString()}</span>
             {isOwner && (
               <>
-                {/* <div> */}
                 <Button onClickEvent={onDeleteClick} btnName={'X'} />
-                {/* </div>
-                <div> */}
                 <Button onClickEvent={toggleEditing} btnName={'Edit'} />
-                {/* </div> */}
               </>
             )}
           </h4>

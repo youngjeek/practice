@@ -13,19 +13,7 @@ import Tally from 'components/tally';
 const Home = ({ userObj }) => {
   const [tally, setTally] = useState('');
   const [tallies, setTallies] = useState([]);
-  // const getTallies = async () => {
-  //   const q = query(collection(dbService, 'tallies'));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((text) => {
-  //     const tallyObj = {
-  //       ...text.data(),
-  //       id: text.id,
-  //     };
-  //     setTallies((prev) => [tallyObj, ...prev]);
-  //   });
-  // };
   useEffect(() => {
-    // getTallies();
     const q = query(
       collection(dbService, 'tallies'),
       orderBy('createDate', 'desc')
@@ -36,7 +24,6 @@ const Home = ({ userObj }) => {
         ...doc.data(),
       }));
       setTallies(newArray);
-      console.log('Current Tally in CA: ', newArray);
       return () => unsubscribe();
     });
   }, []);
@@ -56,6 +43,7 @@ const Home = ({ userObj }) => {
         createdDate: serverTimestamp(),
         createDate: Date.now(),
         createId: userObj.uid,
+        profileImg: userObj.photoURL,
       });
       console.log('Document written with ID: ', docRef.id);
     } catch (e) {

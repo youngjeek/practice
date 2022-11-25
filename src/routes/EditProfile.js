@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Button from 'components/Button';
 import React, { useState } from 'react';
-import { ref, uploadString } from '@firebase/storage';
+import { getDownloadURL, ref, uploadString } from '@firebase/storage';
 import { storageService } from 'fbase';
 import { v4 as uuidv4 } from 'uuid';
 const EditProfile = ({ userObj }) => {
-  console.log(userObj);
   const [attachment, setAttachment] = useState('');
   const onFileChange = (e) => {
     const {
@@ -14,7 +13,6 @@ const EditProfile = ({ userObj }) => {
     const pickFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
-      console.log(finishedEvent);
       const {
         currentTarget: { result },
       } = finishedEvent;
@@ -23,10 +21,19 @@ const EditProfile = ({ userObj }) => {
     reader.readAsDataURL(pickFile);
   };
   const attachmentUpload = async (event) => {
-    const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-    const response = await uploadString(fileRef, attachment, 'data_url');
-    console.log(response);
+    let attachmentUrl = '';
+    if (attachment !== '') {
+      const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      //storage에 해당경로 파일 업로드
+      const profileFile = await uploadString(fileRef, attachment, 'data_url');
+      console.log(profileFile);
+      //storage에 있는 파일 URL로 다운로드 받기
+      attachmentUrl = await getDownloadURL(profileFile.ref);
+      userObj.photoURL = attachmentUrl;
+      console.log(userObj.photoURL);
+    }
   };
+
   //미리보기 취소
   const onClearAttachmentClick = () => setAttachment(null);
   return (
